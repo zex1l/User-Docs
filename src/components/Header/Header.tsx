@@ -21,7 +21,7 @@ const Header = () => {
             <Layout>
 
             <div className={styles.header__inner}>
-                <Link to={'/'} className={styles.header__logo}>Logo</Link>
+                <Link to={'/'} className={styles.header__logo}>User Docs</Link>
                 <nav className={styles.header__nav}>
                     <ul className={styles.header__nav_list}>
                         <li className={styles.header__nav_item}><a href="https://github.com/zex1l">Git Hub</a></li>
