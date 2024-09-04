@@ -2,9 +2,9 @@ import UserDocsEditForm from "../../components/UserDocsEditForm/UserDocsEditForm
 
 const UserDocsEdit = () => {
     return (
-        <section>
+        <main>
             <UserDocsEditForm/>
-        </section>
+        </main>
     );
 };
 

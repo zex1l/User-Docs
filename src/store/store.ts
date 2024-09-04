@@ -1,11 +1,15 @@
 import { configureStore,  } from "@reduxjs/toolkit";
 import userDocsSlice from "./slices/userDocsSlice";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import authSlice from "./slices/authSlice";
+import modalSlice from "./slices/modalSlice";
 
 
 export const store = configureStore({
     reducer: {
-        userDocs: userDocsSlice
+        userDocs: userDocsSlice,
+        auth: authSlice,
+        modal: modalSlice
     }
 })
 

@@ -4,12 +4,13 @@ import UserDocsItem from "../UserDocsItem/UserDocsItem";
 import { useAppDispatch, useAppSelector } from "../../../../store/store";
 import { deleteUserDocsById, getUserDocs, setUserDocs } from "../../../../store/slices/userDocsSlice";
 import { deleteCurrentUserDoc, getUserDocsData } from "../../api/api";
+import Spinner from "../../../../components/Spinner/Spinner";
 
 
 
 const UserDocsList  = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false)
-    const [error, setError] = useState<boolean>(false)
+    const [error, setError] = useState<string>('')
     const dispatch = useAppDispatch()
     const docs = useAppSelector(getUserDocs)
 
@@ -33,7 +34,7 @@ const UserDocsList  = () => {
     }, [docs])
 
     const onDeleteEvent = async( id:string) => {
-        setError(false)
+        setError('')
         setIsLoading(true)
         const response = await deleteCurrentUserDoc(id)
         if(response.error_code === 0)
@@ -41,18 +42,22 @@ const UserDocsList  = () => {
             dispatch(deleteUserDocsById(id))
         }
         else {
-            setError(true)
+            setError('Oops somthing go wrong, try again')
         }
         setIsLoading(false)
     }
 
     return (
-        <ul className={styles.userDocs__list}>
-            {
-                data.map((item) => <UserDocsItem key={item.id} item={item} onDeleteEvent={onDeleteEvent}/>)
-            }
-            {isLoading && <div>...Loading</div>}
-        </ul>
+        <>
+            <ul className={styles.userDocs__list}>
+                
+                {
+                    data.map((item) => <UserDocsItem key={item.id} item={item} onDeleteEvent={onDeleteEvent}/>)
+                }
+                {isLoading && <Spinner/>}
+                {error && <div>{error}</div>}
+            </ul>
+        </>
     );
 };
 

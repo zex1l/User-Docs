@@ -1,5 +1,5 @@
 import { axi } from "../../../config/axios"
-import { DELETE_USER_DOC_BY_ID, GET_ALL_DOCS, UPDATE_USER_DOC_BY_ID } from "../../../config/consts"
+import { CREATE_NEW_USER_DOC, DELETE_USER_DOC_BY_ID, GET_ALL_DOCS, UPDATE_USER_DOC_BY_ID } from "../../../config/consts"
 import { getAuthToken } from "../../../helpers/token"
 import { IUserDocs } from "../../../types/IUserDocs"
 
@@ -53,5 +53,18 @@ export const deleteCurrentUserDoc = async(id:string) => {
         }
     })
 
+    return response.data
+}
+
+
+export const createNewUserDoc = async (document: IUserDocs) => {
+    const token = getAuthToken()
+    const response = await axi.post(CREATE_NEW_USER_DOC, document, {
+        headers: {
+            'x-auth': token
+        }
+    })
+    console.log(response);
+    
     return response.data
 }

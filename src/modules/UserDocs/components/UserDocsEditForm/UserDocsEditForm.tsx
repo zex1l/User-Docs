@@ -1,11 +1,14 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { IUserDocs } from "../../../../types/IUserDocs";
 import { getUserDocsById, updateUserDoc} from "../../api/api";
 import styles from './UserDocsFormEdit.module.scss'
 import { useAppDispatch } from "../../../../store/store";
 import { updateCurrentDoc } from "../../../../store/slices/userDocsSlice";
 import FormField from "../FormField/FormField";
+import Spinner from "../../../../components/Spinner/Spinner";
+import { openModal } from "../../../../store/slices/modalSlice";
+import { convertDateFromBack } from "../../../../utils/convertDate";
 
 
 const UserDocsEditForm = () => {
@@ -20,18 +23,25 @@ const UserDocsEditForm = () => {
         employeeSignatureName: '',
         id: '',
     })
+
     const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [error, setError] = useState<string>('')
+    const navigate = useNavigate()
+
     const {id} = useParams()
     const dispatch = useAppDispatch()
-
-
 
     const fetchUserDocDataFromBackend = async(id:string) => {
         setIsLoading(true)
         const response = await getUserDocsById(id)
 
         if(!response?.error_code) {
-            setcurrentDocumnet(response)
+            const dateEmployee = convertDateFromBack(response.employeeSigDate)
+            const dateCompany = convertDateFromBack(response.companySigDate)
+            setcurrentDocumnet({...response, 
+                companySigDate: dateCompany,
+                employeeSigDate: dateEmployee
+            })
         }
         setIsLoading(false)
     }
@@ -52,15 +62,18 @@ const UserDocsEditForm = () => {
 
 
     const onSubmitEvent = async(event: FormEvent<HTMLFormElement>) => {
+        setError('')
         event.preventDefault()
         setIsLoading(true)
         const response = await updateUserDoc(currentDocumnet)
 
         if(response.error_code === 0) {
             dispatch(updateCurrentDoc(response))
+            dispatch(openModal('Update was completed'))
+            navigate('/')
         }
         else {
-            console.log('Ошибка')
+            setError('Error while edit document')
         }
 
         setIsLoading(false)
@@ -68,10 +81,16 @@ const UserDocsEditForm = () => {
 
 
     return (
-        <article className={styles.editUserDoc}>
-            <FormField currentDocumnet={currentDocumnet} onHandleChange={onHandleChange} onSubmitEvent={onSubmitEvent} title="edit"/>
-            {isLoading && <div>...Loading</div>}
-        </article>
+        <section className={styles.editUserDoc}>
+            <FormField 
+                    currentDocumnet={currentDocumnet} 
+                    onHandleChange={onHandleChange} 
+                    onSubmitEvent={onSubmitEvent} 
+                    title="edit" 
+                    error={error}
+            />
+            {isLoading && <Spinner/>}
+        </section>
     );
 };
 

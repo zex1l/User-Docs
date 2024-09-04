@@ -23,6 +23,9 @@ const userDocsSlice = createSlice({
                 }
                 return doc
             })
+        },
+        addNewUserDoc: (state, action: PayloadAction<IUserDocs>) => {
+            state.docs = [...state.docs, action.payload]
         }
     }
     }
@@ -31,7 +34,8 @@ const userDocsSlice = createSlice({
 export const {
     setUserDocs,
     deleteUserDocsById,
-    updateCurrentDoc
+    updateCurrentDoc,
+    addNewUserDoc
 } = userDocsSlice.actions
 
 export const getUserDocs = (state: RootState) => state.userDocs.docs

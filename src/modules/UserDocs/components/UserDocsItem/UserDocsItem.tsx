@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 import TrashIcon from '../../../../assets/trash.svg'
 import EditIcon from '../../../../assets/edit.svg'
+import { convertDateFromBack } from "../../../../utils/convertDate";
 
 interface UserDocsItemProp {
     item: IUserDocs,
@@ -22,11 +23,11 @@ const UserDocsItem: FC <UserDocsItemProp> = ({item, onDeleteEvent}) => {
                 <footer className={styles.userDoc__item_footer}>
                     <div>
                         <p>Employee Signature: {item.employeeSignatureName} / id: {item.employeeNumber}</p>
-                        <p>Date: {item.employeeSigDate}</p>
+                        <p>Date: {convertDateFromBack(item.employeeSigDate)}</p>
                     </div>
                     <div>
                         <p>Company Signature: {item.companySignatureName}</p>
-                        <p>Date: {item.companySigDate}</p>
+                        <p>Date: {convertDateFromBack(item.companySigDate)}</p>
                     </div>
                     <div className={styles.userDoc__item_footer_buttons}>
                         <button>

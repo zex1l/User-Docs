@@ -1,13 +1,16 @@
-import { FC, PropsWithChildren } from "react";
+import { FC, PropsWithChildren} from "react";
 import { Navigate } from "react-router-dom";
-import { getAuthToken } from "../../helpers/token";
+import {  useAppSelector } from "../../store/store";
+import { getisAuth} from "../../store/slices/authSlice";
+
 
 
 
 const ProtectendRoute : FC <PropsWithChildren> = ({children}) => {
-    const token  = getAuthToken()
+    const isAuth = useAppSelector(getisAuth)
+    
 
-    if(!token) return <Navigate to={'/sign_in'}/>
+    if(!isAuth) return <Navigate to={'/sign_in'}/>
 
 
     return children

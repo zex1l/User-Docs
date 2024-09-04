@@ -13,5 +13,14 @@
             align-items: center;
             gap: 30px;
         }
+
+        &_item {
+            
+
+            &_btn {
+                color: inherit;
+                font-size: 16px;
+            }
+        }
     }
 }
