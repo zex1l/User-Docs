@@ -1,0 +1,18 @@
+.notFound {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 50px;
+
+    &__link {
+        color: #b4b1b1;
+        transition: all 0.2s ease;
+
+        &:hover {
+            color: #b4b1b1;
+            transform: scale(1.1);
+        }
+    }
+}
