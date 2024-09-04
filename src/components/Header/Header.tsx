@@ -24,7 +24,7 @@ const Header = () => {
                 <Link to={'/'} className={styles.header__logo}>Logo</Link>
                 <nav className={styles.header__nav}>
                     <ul className={styles.header__nav_list}>
-                        <li className={styles.header__nav_item}><a href="#">Git Hub</a></li>
+                        <li className={styles.header__nav_item}><a href="https://github.com/zex1l">Git Hub</a></li>
                         {isAuth && <li className={styles.header__nav_item}><button className={styles.header__nav_item_btn} onClick={onLogout }>Exit</button></li>}
                     </ul>
                 </nav>

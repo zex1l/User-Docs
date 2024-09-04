@@ -22,8 +22,9 @@ const UserDocsItem: FC <UserDocsItemProp> = ({item, onDeleteEvent}) => {
                 </div>
                 <footer className={styles.userDoc__item_footer}>
                     <div>
-                        <p>Employee Signature: {item.employeeSignatureName} / id: {item.employeeNumber}</p>
+                        <p>Employee Signature: {item.employeeSignatureName} </p>
                         <p>Date: {convertDateFromBack(item.employeeSigDate)}</p>
+                        <p>id: {item.employeeNumber}</p>
                     </div>
                     <div>
                         <p>Company Signature: {item.companySignatureName}</p>
@@ -32,9 +33,9 @@ const UserDocsItem: FC <UserDocsItemProp> = ({item, onDeleteEvent}) => {
                     <div className={styles.userDoc__item_footer_buttons}>
                         <button>
                             <Link to={`/doc/edit/${item.id}`}>
-                                <img width={'30px'} height={'30px'} className={styles.editIcon} src={EditIcon} alt="edit button" />
+                                <img  width={'30px'} height={'30px'} className={styles.editIcon} src={EditIcon} alt="edit button" />
                             </Link>
-                            </button>
+                        </button>
                         <button onClick={() => onDeleteEvent(item.id)}><img width={'30px'} height={'30px'} src={TrashIcon} alt="delete button"/></button>
                     </div>
                 </footer>

@@ -7,6 +7,11 @@
     border-radius: 20px;
     gap: 15px;
     font-weight: 400;
+    padding: 30px;
+
+    animation-name: moved;
+    animation-duration: 1s;
+
 
     &_header {
         padding-bottom: 10px;
@@ -27,9 +32,19 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+
+            
         }
     }
 
     
 }
 
+@keyframes moved {
+    0% {
+        transform: translateX(-1000px);
+    }
+    100% {
+        transform: translateX(0px);
+    }
+}
