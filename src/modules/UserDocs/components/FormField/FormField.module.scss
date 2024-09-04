@@ -1,0 +1,24 @@
+.formField {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 50px;
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        gap: 20px;
+
+        &_input {
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+
+        &_button {
+            background-color: #12c939;
+            border-radius: 5px;
+            padding: 10px 20px;
+        } 
+    }
+}
